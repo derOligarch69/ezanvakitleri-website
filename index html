@@ -8,17 +8,6 @@
     <script src="script.js" defer></script>
     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-  (function(w, d) {
-    var s = d.createElement('script'); 
-    s.src = 'https://cdn.vercel-insights.com/v1/script.js'; 
-    s.defer = true; 
-    s.onload = function() {
-      w.vitals && w.vitals.sendToVercel();
-    };
-    d.head.appendChild(s);
-  })(window, document);
-</script>
 </head>
 <body>
     <div class="background">
