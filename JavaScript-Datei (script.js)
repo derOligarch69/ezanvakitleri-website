@@ -1,62 +1,57 @@
-const apiBaseUrl = "https://api.aladhan.com/v1/timingsByAddress";
+// API-Konfiguration
+const apiBaseUrl = "https://api.aladhan.com/v1/timingsByAddress?address=";
+const method = "&method=2"; // Berechnungsmethode, hier Hanafi/ISNA
 
-// Zuordnung der türkischen Namen
-const turkishNames = {
-    Fajr: "İmsak",
-    Dhuhr: "Öğle",
-    Asr: "İkindi",
-    Maghrib: "Akşam",
-    Isha: "Yatsı",
-    Sunrise: "Güneş",
-    Sunset: "Günbatımı"
-};
+// DOM-Elemente
+const postalCodeInput = document.getElementById("postalCode");
+const fetchTimesButton = document.getElementById("fetchTimes");
+const timesList = document.getElementById("timesList");
 
-document.getElementById("fetchTimes").addEventListener("click", () => {
-    const postalCode = document.getElementById("postalCode").value.trim();
+// Funktion: Gebetszeiten abrufen
+async function fetchPrayerTimes(postalCode) {
+    try {
+        const response = await fetch(`${apiBaseUrl}${postalCode}${method}`);
+        const data = await response.json();
 
-    if (postalCode && postalCode.match(/^\d{5}$/)) {
+        if (data.code === 200) {
+            const timings = data.data.timings;
+            displayPrayerTimes(timings);
+        } else {
+            alert("Fehler: Gebetszeiten konnten nicht abgerufen werden.");
+        }
+    } catch (error) {
+        console.error("API-Fehler:", error);
+        alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+    }
+}
+
+// Funktion: Gebetszeiten anzeigen
+function displayPrayerTimes(timings) {
+    const prayerNames = {
+        Fajr: "İmsak",
+        Dhuhr: "Öğle",
+        Asr: "İkindi",
+        Maghrib: "Akşam",
+        Isha: "Yatsı"
+    };
+
+    timesList.innerHTML = ""; // Liste leeren
+
+    for (const [key, value] of Object.entries(timings)) {
+        if (prayerNames[key]) {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `${key}: ${value} <div class="turkish-name">${prayerNames[key]}</div>`;
+            timesList.appendChild(listItem);
+        }
+    }
+}
+
+// Event-Listener für den Button
+fetchTimesButton.addEventListener("click", () => {
+    const postalCode = postalCodeInput.value.trim();
+    if (postalCode.length === 5) {
         fetchPrayerTimes(postalCode);
     } else {
-        alert("Bitte geben Sie eine gültige 5-stellige Postleitzahl ein.");
+        alert("Bitte geben Sie eine gültige PLZ ein.");
     }
 });
-
-function fetchPrayerTimes(postalCode) {
-    const country = "Germany"; // Land festlegen
-    const apiUrl = `${apiBaseUrl}?address=${postalCode},${country}&method=2`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.code === 200) {
-                displayPrayerTimes(data.data.timings);
-            } else {
-                alert("Gebetszeiten konnten nicht abgerufen werden.");
-            }
-        })
-        .catch(error => console.error("Fehler beim Abrufen der Gebetszeiten:", error));
-}
-
-function displayPrayerTimes(timings) {
-    const timesList = document.getElementById("timesList");
-    timesList.innerHTML = ""; // Vorherige Zeiten löschen
-
-    for (const [prayer, time] of Object.entries(timings)) {
-        // Erstelle ein Listen-Element für jede Gebetszeit
-        const listItem = document.createElement("li");
-
-        // Deutsche Gebetszeit
-        const prayerTime = document.createElement("div");
-        prayerTime.textContent = `${prayer}: ${time}`;
-
-        // Türkischer Name
-        const turkishName = document.createElement("div");
-        turkishName.className = "turkish-name";
-        turkishName.textContent = `(${turkishNames[prayer] || "Unbekannt"})`;
-
-        // Füge beide Elemente in die Liste ein
-        listItem.appendChild(prayerTime);
-        listItem.appendChild(turkishName);
-        timesList.appendChild(listItem);
-    }
-}
