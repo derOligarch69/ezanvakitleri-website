@@ -6,6 +6,20 @@
     <title>Islamische Gebetszeiten</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Vercel Speed Insights Integration -->
+    <script>
+        (function(w, d) {
+            var s = d.createElement('script'); 
+            s.src = 'https://cdn.vercel-insights.com/v1/script.js'; 
+            s.defer = true; 
+            s.onload = function() {
+                w.vitals && w.vitals.sendToVercel();
+            };
+            d.head.appendChild(s);
+        })(window, document);
+    </script>
 </head>
 <body>
     <div class="background">
@@ -16,17 +30,19 @@
             </header>
             <main>
                 <section class="input-section">
+                    <p>Gib deine Postleitzahl ein oder erlaube uns, deinen Standort zu verwenden:</p>
                     <input 
                         type="text" 
                         id="postalCode" 
                         placeholder="PLZ eingeben (z. B. 10115)"
                         maxlength="5">
                     <button id="fetchTimes">Zeige Gebetszeiten</button>
+                    <button id="getLocation">Standort verwenden</button>
                 </section>
                 <section id="prayer-times" class="prayer-section">
                     <h2>Gebetszeiten</h2>
                     <ul id="timesList">
-                        <li>Bitte geben Sie Ihre PLZ ein.</li>
+                        <li>Bitte gib deine PLZ ein oder erlaube den Zugriff auf deinen Standort.</li>
                     </ul>
                 </section>
             </main>
