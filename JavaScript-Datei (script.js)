@@ -8,7 +8,7 @@ document.getElementById("fetchTimes").addEventListener("click", function() {
 });
 
 function fetchPrayerTimes(postalCode) {
-    // API-Aufruf zu PrayTimes
+    // Hier verwenden wir eine API wie die PrayTimes API, die nach PLZ die Gebetszeiten zurückgibt.
     fetch(`https://api.pray.zone/v2/times/today.json?city=${postalCode}&country=Germany&method=2`)
         .then(response => response.json())
         .then(data => {
