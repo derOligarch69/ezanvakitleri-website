@@ -1,4 +1,4 @@
-// API-Konfiguration
+  // API-Konfiguration
 const apiBaseUrl = "https://api.aladhan.com/v1/timingsByAddress?address=";
 const method = "&method=2"; // Berechnungsmethode, hier Hanafi/ISNA
 
