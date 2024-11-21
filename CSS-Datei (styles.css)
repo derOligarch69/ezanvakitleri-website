@@ -1,10 +1,10 @@
 /* Grundstyle */
 body {
     font-family: Arial, sans-serif;
-    color: #fff; /* Weißer Text für bessere Lesbarkeit auf dunklem Hintergrund */
+    color: #fff;
     margin: 0;
     padding: 0;
-    background: url('https://example.com/your-mountain-image.jpg') no-repeat center center fixed;
+    background: url('https://www.shutterstock.com/image-photo/breathtaking-aerial-view-alpine-snowcapped-600nw-2375899253.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -14,7 +14,7 @@ body {
 
 /* Das Overlay für den Inhalt */
 .overlay {
-    background: rgba(0, 0, 0, 0.6); /* Dunkles halbtransparentes Overlay für bessere Lesbarkeit */
+    background: rgba(0, 0, 0, 0.6);
     padding: 30px;
     border-radius: 10px;
     max-width: 600px;
@@ -87,11 +87,6 @@ footer {
     text-align: center;
     color: #dcdcdc;
     margin-top: 30px;
-}
-
-/* Google AdSense - Platzierung */
-.adsbygoogle {
-    margin-top: 20px;
 }
 
 /* Mobile Anpassungen */
