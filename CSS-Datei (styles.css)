@@ -1,114 +1,28 @@
-/* Grundstyle */
+/* Setze Höhe und Flexbox für den gesamten Bildschirm */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hintergrundbild */
 body {
     font-family: Arial, sans-serif;
     color: #fff;
-    margin: 0;
-    padding: 0;
     background: url('https://www.shutterstock.com/image-photo/breathtaking-aerial-view-alpine-snowcapped-600nw-2375899253.jpg') no-repeat center center fixed;
-    background-size: cover;  /* Das Bild wird vollständig gedehnt */
-    height: 100vh;  /* Höhe des Viewports */
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Das Overlay für den Inhalt */
+/* Container für den Inhalt */
 .overlay {
-    background: rgba(0, 0, 0, 0.6);  /* Der schwarze transparente Hintergrund */
+    background: rgba(0, 0, 0, 0.6);
     padding: 30px;
     border-radius: 10px;
     max-width: 600px;
     width: 100%;
     text-align: center;
-}
-
-/* Header-Styling */
-header h1 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2rem;
-    color: #dcdcdc;
-}
-
-/* Eingabefeld und Buttons */
-.input-section {
-    margin-bottom: 20px;
-}
-
-#postalCode {
-    padding: 10px;
-    font-size: 16px;
-    margin-right: 10px;
-    width: 150px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #333;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 10px;
-    background-color: #00796b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #004d40;
-}
-
-/* Gebetszeiten Liste */
-#prayer-times ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#prayer-times li {
-    background-color: rgba(0, 0, 0, 0.7);
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-/* Footer-Styling */
-footer {
-    text-align: center;
-    color: #dcdcdc;
-    margin-top: 30px;
-}
-
-/* Mobile Anpassungen */
-@media screen and (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-
-    header p {
-        font-size: 1rem;
-    }
-
-    .input-section {
-        margin-bottom: 15px;
-    }
-
-    #postalCode {
-        width: 100%;
-        margin-right: 0;
-    }
-
-    button {
-        width: 100%;
-    }
+    z-index: 1;
 }
