@@ -1,71 +1,33 @@
-// Button für PLZ eingeben
 document.getElementById("fetchTimes").addEventListener("click", function() {
-    const postalCode = document.getElementById("postalCode").value;
-
-    if (!postalCode) {
-        alert("Bitte gib eine gültige PLZ ein.");
-        return;
+    var postalCode = document.getElementById("postalCode").value;
+    if (postalCode.length == 5) {
+        fetchPrayerTimes(postalCode);
+    } else {
+        alert("Bitte geben Sie eine gültige PLZ ein.");
     }
+});
 
-    // API-URL für Gebetszeiten mit PLZ
-    const apiUrl = `https://api.prayerapi.com/v1/timingsByAddress?address=${postalCode}&method=2`;
-
-    // API-Daten abrufen
-    fetch(apiUrl)
+function fetchPrayerTimes(postalCode) {
+    fetch(`https://api.aladhan.com/v1/timingsByCity?city=${postalCode}&country=Germany&method=2`)
         .then(response => response.json())
         .then(data => {
-            if (data && data.timings) {
-                displayPrayerTimes(data.timings);
+            if (data.code === 200) {
+                displayPrayerTimes(data.data.timings);
             } else {
-                alert("Fehler bei der API-Antwort oder ungültige PLZ.");
+                alert("Es gab ein Problem beim Abrufen der Gebetszeiten.");
             }
         })
         .catch(error => {
-            console.error("Fehler bei der API-Anfrage:", error);
-            alert("Fehler bei der Verbindung zur API.");
+            console.error("Fehler:", error);
         });
-});
+}
 
-// Button für Standort verwenden
-document.getElementById("getLocation").addEventListener("click", function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            // API-URL für Gebetszeiten mit Standortdaten
-            const apiUrl = `https://api.prayerapi.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2`;
-
-            // API-Daten abrufen
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.timings) {
-                        displayPrayerTimes(data.timings);
-                    } else {
-                        alert("Fehler bei der API-Antwort.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Fehler bei der API-Anfrage:", error);
-                    alert("Fehler bei der Verbindung zur API.");
-                });
-        }, function() {
-            alert("Standortzugriff verweigert oder nicht verfügbar.");
-        });
-    } else {
-        alert("Geolokalisierung wird von diesem Browser nicht unterstützt.");
+function displayPrayerTimes(times) {
+    var list = document.getElementById("timesList");
+    list.innerHTML = '';  // Vorherige Einträge löschen
+    for (var prayer in times) {
+        var listItem = document.createElement("li");
+        listItem.textContent = `${prayer}: ${times[prayer]}`;
+        list.appendChild(listItem);
     }
-});
-
-// Gebetszeiten anzeigen
-function displayPrayerTimes(timings) {
-    const timesList = document.getElementById("timesList");
-    timesList.innerHTML = `
-        <li><strong>Fajr:</strong> ${timings.Fajr}</li>
-        <li><strong>Dhuhr:</strong> ${timings.Dhuhr}</li>
-        <li><strong>Asr:</strong> ${timings.Asr}</li>
-        <li><strong>Maghrib:</strong> ${timings.Maghrib}</li>
-        <li><strong>Isha:</strong> ${timings.Isha}</li>
-    `;
 }
