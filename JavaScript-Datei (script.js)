@@ -1,18 +1,19 @@
 document.getElementById("fetchTimes").addEventListener("click", function() {
     var postalCode = document.getElementById("postalCode").value;
-    if (postalCode.length == 5) {
+    if (postalCode.length === 5) {
         fetchPrayerTimes(postalCode);
     } else {
-        alert("Bitte geben Sie eine gültige PLZ ein.");
+        alert("Bitte gib eine gültige PLZ ein.");
     }
 });
 
 function fetchPrayerTimes(postalCode) {
-    fetch(`https://api.aladhan.com/v1/timingsByCity?city=${postalCode}&country=Germany&method=2`)
+    // API-Aufruf zu PrayTimes
+    fetch(`https://api.pray.zone/v2/times/today.json?city=${postalCode}&country=Germany&method=2`)
         .then(response => response.json())
         .then(data => {
-            if (data.code === 200) {
-                displayPrayerTimes(data.data.timings);
+            if (data.status === "OK") {
+                displayPrayerTimes(data.results.timings);
             } else {
                 alert("Es gab ein Problem beim Abrufen der Gebetszeiten.");
             }
