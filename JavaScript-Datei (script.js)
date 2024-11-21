@@ -1,0 +1,62 @@
+const apiBaseUrl = "https://api.aladhan.com/v1/timingsByAddress";
+
+// Zuordnung der türkischen Namen
+const turkishNames = {
+    Fajr: "İmsak",
+    Dhuhr: "Öğle",
+    Asr: "İkindi",
+    Maghrib: "Akşam",
+    Isha: "Yatsı",
+    Sunrise: "Güneş",
+    Sunset: "Günbatımı"
+};
+
+document.getElementById("fetchTimes").addEventListener("click", () => {
+    const postalCode = document.getElementById("postalCode").value.trim();
+
+    if (postalCode && postalCode.match(/^\d{5}$/)) {
+        fetchPrayerTimes(postalCode);
+    } else {
+        alert("Bitte geben Sie eine gültige 5-stellige Postleitzahl ein.");
+    }
+});
+
+function fetchPrayerTimes(postalCode) {
+    const country = "Germany"; // Land festlegen
+    const apiUrl = `${apiBaseUrl}?address=${postalCode},${country}&method=2`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 200) {
+                displayPrayerTimes(data.data.timings);
+            } else {
+                alert("Gebetszeiten konnten nicht abgerufen werden.");
+            }
+        })
+        .catch(error => console.error("Fehler beim Abrufen der Gebetszeiten:", error));
+}
+
+function displayPrayerTimes(timings) {
+    const timesList = document.getElementById("timesList");
+    timesList.innerHTML = ""; // Vorherige Zeiten löschen
+
+    for (const [prayer, time] of Object.entries(timings)) {
+        // Erstelle ein Listen-Element für jede Gebetszeit
+        const listItem = document.createElement("li");
+
+        // Deutsche Gebetszeit
+        const prayerTime = document.createElement("div");
+        prayerTime.textContent = `${prayer}: ${time}`;
+
+        // Türkischer Name
+        const turkishName = document.createElement("div");
+        turkishName.className = "turkish-name";
+        turkishName.textContent = `(${turkishNames[prayer] || "Unbekannt"})`;
+
+        // Füge beide Elemente in die Liste ein
+        listItem.appendChild(prayerTime);
+        listItem.appendChild(turkishName);
+        timesList.appendChild(listItem);
+    }
+}
