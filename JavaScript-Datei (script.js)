@@ -1,57 +1,71 @@
-// API-Konfiguration
-const apiBaseUrl = "https://api.aladhan.com/v1/timingsByAddress?address=";
-const method = "&method=2"; // Berechnungsmethode, hier Hanafi/ISNA
+// Button für PLZ eingeben
+document.getElementById("fetchTimes").addEventListener("click", function() {
+    const postalCode = document.getElementById("postalCode").value;
 
-// DOM-Elemente
-const postalCodeInput = document.getElementById("postalCode");
-const fetchTimesButton = document.getElementById("fetchTimes");
-const timesList = document.getElementById("timesList");
-
-// Funktion: Gebetszeiten abrufen
-async function fetchPrayerTimes(postalCode) {
-    try {
-        const response = await fetch(`${apiBaseUrl}${postalCode}${method}`);
-        const data = await response.json();
-
-        if (data.code === 200) {
-            const timings = data.data.timings;
-            displayPrayerTimes(timings);
-        } else {
-            alert("Fehler: Gebetszeiten konnten nicht abgerufen werden.");
-        }
-    } catch (error) {
-        console.error("API-Fehler:", error);
-        alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+    if (!postalCode) {
+        alert("Bitte gib eine gültige PLZ ein.");
+        return;
     }
-}
 
-// Funktion: Gebetszeiten anzeigen
-function displayPrayerTimes(timings) {
-    const prayerNames = {
-        Fajr: "İmsak",
-        Dhuhr: "Öğle",
-        Asr: "İkindi",
-        Maghrib: "Akşam",
-        Isha: "Yatsı"
-    };
+    // API-URL für Gebetszeiten mit PLZ
+    const apiUrl = `https://api.prayerapi.com/v1/timingsByAddress?address=${postalCode}&method=2`;
 
-    timesList.innerHTML = ""; // Liste leeren
+    // API-Daten abrufen
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.timings) {
+                displayPrayerTimes(data.timings);
+            } else {
+                alert("Fehler bei der API-Antwort oder ungültige PLZ.");
+            }
+        })
+        .catch(error => {
+            console.error("Fehler bei der API-Anfrage:", error);
+            alert("Fehler bei der Verbindung zur API.");
+        });
+});
 
-    for (const [key, value] of Object.entries(timings)) {
-        if (prayerNames[key]) {
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `${key}: ${value} <div class="turkish-name">${prayerNames[key]}</div>`;
-            timesList.appendChild(listItem);
-        }
-    }
-}
+// Button für Standort verwenden
+document.getElementById("getLocation").addEventListener("click", function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
 
-// Event-Listener für den Button
-fetchTimesButton.addEventListener("click", () => {
-    const postalCode = postalCodeInput.value.trim();
-    if (postalCode.length === 5) {
-        fetchPrayerTimes(postalCode);
+            // API-URL für Gebetszeiten mit Standortdaten
+            const apiUrl = `https://api.prayerapi.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2`;
+
+            // API-Daten abrufen
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.timings) {
+                        displayPrayerTimes(data.timings);
+                    } else {
+                        alert("Fehler bei der API-Antwort.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Fehler bei der API-Anfrage:", error);
+                    alert("Fehler bei der Verbindung zur API.");
+                });
+        }, function() {
+            alert("Standortzugriff verweigert oder nicht verfügbar.");
+        });
     } else {
-        alert("Bitte geben Sie eine gültige PLZ ein.");
+        alert("Geolokalisierung wird von diesem Browser nicht unterstützt.");
     }
 });
+
+// Gebetszeiten anzeigen
+function displayPrayerTimes(timings) {
+    const timesList = document.getElementById("timesList");
+    timesList.innerHTML = `
+        <li><strong>Fajr:</strong> ${timings.Fajr}</li>
+        <li><strong>Dhuhr:</strong> ${timings.Dhuhr}</li>
+        <li><strong>Asr:</strong> ${timings.Asr}</li>
+        <li><strong>Maghrib:</strong> ${timings.Maghrib}</li>
+        <li><strong>Isha:</strong> ${timings.Isha}</li>
+    `;
+}
