@@ -22,34 +22,32 @@
     </script>
 </head>
 <body>
-    <div class="background">
-        <div class="overlay">
-            <header>
-                <h1>Islamische Gebetszeiten</h1>
-                <p>Aktuelle Gebetszeiten für deinen Standort</p>
-            </header>
-            <main>
-                <section class="input-section">
-                    <p>Gib deine Postleitzahl ein oder erlaube uns, deinen Standort zu verwenden:</p>
-                    <input 
-                        type="text" 
-                        id="postalCode" 
-                        placeholder="PLZ eingeben (z. B. 10115)"
-                        maxlength="5">
-                    <button id="fetchTimes">Zeige Gebetszeiten</button>
-                    <button id="getLocation">Standort verwenden</button>
-                </section>
-                <section id="prayer-times" class="prayer-section">
-                    <h2>Gebetszeiten</h2>
-                    <ul id="timesList">
-                        <li>Bitte gib deine PLZ ein oder erlaube den Zugriff auf deinen Standort.</li>
-                    </ul>
-                </section>
-            </main>
-            <footer>
-                <p>© 2024 Gebetszeiten-Service | <a href="#">Datenschutz</a> | <a href="#">Impressum</a></p>
-            </footer>
-        </div>
+    <div class="overlay">
+        <header>
+            <h1>Islamische Gebetszeiten</h1>
+            <p>Aktuelle Gebetszeiten für deinen Standort</p>
+        </header>
+        <main>
+            <section class="input-section">
+                <p>Gib deine Postleitzahl ein oder erlaube uns, deinen Standort zu verwenden:</p>
+                <input 
+                    type="text" 
+                    id="postalCode" 
+                    placeholder="PLZ eingeben (z. B. 10115)"
+                    maxlength="5">
+                <button id="fetchTimes">Zeige Gebetszeiten</button>
+                <button id="getLocation">Standort verwenden</button>
+            </section>
+            <section id="prayer-times" class="prayer-section">
+                <h2>Gebetszeiten</h2>
+                <ul id="timesList">
+                    <li>Bitte gib deine PLZ ein oder erlaube den Zugriff auf deinen Standort.</li>
+                </ul>
+            </section>
+        </main>
+        <footer>
+            <p>© 2024 Gebetszeiten-Service | <a href="#">Datenschutz</a> | <a href="#">Impressum</a></p>
+        </footer>
     </div>
 </body>
 </html>
