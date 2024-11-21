@@ -1,11 +1,10 @@
-/* Setze Höhe und Flexbox für den gesamten Bildschirm */
+/* Hintergrundbild */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-/* Hintergrundbild */
 body {
     font-family: Arial, sans-serif;
     color: #fff;
@@ -25,4 +24,34 @@ body {
     width: 100%;
     text-align: center;
     z-index: 1;
+}
+
+/* Weitere Anpassungen wie Button-Style und Gebetszeiten */
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+/* Gebetszeiten */
+#prayer-times ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#prayer-times li {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
 }
