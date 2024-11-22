@@ -1,69 +1,70 @@
-/* Global Styles */
-* {
+/* Allgemeine Einstellungen */
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
 }
 
-html, body {
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background: url('https://www.shutterstock.com/image-photo/night-kaaba-mecca-600w-2251046836.jpg') no-repeat center center fixed;
+/* Hintergrund mit Kaaba */
+.background {
+    background: url('https://www.shutterstock.com/image-photo/kaaba-makkah-night-view-600w-1613381637.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #fff;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 30px;
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
     border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2rem;
+/* Input-Bereich */
+.input-section {
     margin-bottom: 20px;
 }
 
-input, button {
+#postalCode {
     padding: 10px;
     font-size: 1rem;
-    margin: 5px 0;
-    border-radius: 8px;
     border: none;
+    border-radius: 5px;
+    width: 70%;
 }
 
 button {
-    background-color: #ff8000;
+    padding: 10px 15px;
+    font-size: 1rem;
     color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #e07b00;
+    background-color: #218838;
 }
 
-#prayer-times ul {
+/* Gebetszeiten */
+.prayer-section {
+    text-align: left;
+}
+
+.prayer-section ul {
     list-style: none;
     padding: 0;
-    margin-top: 15px;
 }
 
-#prayer-times li {
-    background: rgba(255, 255, 255, 0.3);
-    margin: 8px 0;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: left;
+.prayer-section li {
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: center;
 }
