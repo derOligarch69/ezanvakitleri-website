@@ -1,5 +1,6 @@
+// Gebetszeiten für PLZ oder Standort abrufen
 document.getElementById("fetchTimes").addEventListener("click", function() {
-    var postalCode = document.getElementById("postalCode").value;
+    const postalCode = document.getElementById("postalCode").value;
     if (postalCode.length === 5) {
         fetchPrayerTimes(postalCode);
     } else {
@@ -7,28 +8,43 @@ document.getElementById("fetchTimes").addEventListener("click", function() {
     }
 });
 
-function fetchPrayerTimes(postalCode) {
-    // Hier verwenden wir eine API wie die PrayTimes API, die nach PLZ die Gebetszeiten zurückgibt.
-    fetch(`https://api.pray.zone/v2/times/today.json?city=${postalCode}&country=Germany&method=2`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "OK") {
-                displayPrayerTimes(data.results.timings);
-            } else {
-                alert("Es gab ein Problem beim Abrufen der Gebetszeiten.");
-            }
-        })
-        .catch(error => {
-            console.error("Fehler:", error);
+// Standortbasiertes Abrufen der Gebetszeiten
+document.getElementById("useLocation").addEventListener("click", function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            fetchPrayerTimesByLocation(latitude, longitude);
+        }, () => {
+            alert("Standortzugriff wurde verweigert.");
         });
+    } else {
+        alert("Dein Browser unterstützt keine Geolocation.");
+    }
+});
+
+// Daten basierend auf PLZ abrufen
+function fetchPrayerTimes(postalCode) {
+    fetch(`https://api.pray.zone/v2/times/today.json?city=${postalCode}&method=2`)
+        .then(response => response.json())
+        .then(data => displayPrayerTimes(data.results.datetime[0].times))
+        .catch(error => console.error("Fehler beim Abrufen der Daten:", error));
 }
 
+// Daten basierend auf Geolocation abrufen
+function fetchPrayerTimesByLocation(lat, lng) {
+    fetch(`https://api.pray.zone/v2/times/today.json?latitude=${lat}&longitude=${lng}&method=2`)
+        .then(response => response.json())
+        .then(data => displayPrayerTimes(data.results.datetime[0].times))
+        .catch(error => console.error("Fehler beim Abrufen der Daten:", error));
+}
+
+// Gebetszeiten anzeigen
 function displayPrayerTimes(times) {
-    var list = document.getElementById("timesList");
-    list.innerHTML = '';  // Vorherige Einträge löschen
-    for (var prayer in times) {
-        var listItem = document.createElement("li");
-        listItem.textContent = `${prayer}: ${times[prayer]}`;
+    const list = document.getElementById("timesList");
+    list.innerHTML = ""; // Liste leeren
+    for (const [prayer, time] of Object.entries(times)) {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${prayer}: ${time}`;
         list.appendChild(listItem);
     }
 }
