@@ -3,48 +3,49 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
 html, body {
     height: 100%;
     font-family: 'Arial', sans-serif;
-    background: url('https://your-image-path-to-kaaba-image.jpg') no-repeat center center fixed;
+    background: url('https://www.shutterstock.com/image-photo/night-kaaba-mecca-600w-2251046836.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.8); /* Dimming effect */
+    background: rgba(0, 0, 0, 0.8);
     padding: 30px;
     max-width: 600px;
     width: 100%;
     text-align: center;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.7);
 }
 
-h1 {
+header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
 }
 
-p {
+header p {
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
-button {
-    padding: 12px 20px;
+input, button {
+    padding: 10px;
     font-size: 1rem;
+    margin: 5px 0;
+    border-radius: 8px;
     border: none;
+}
+
+button {
     background-color: #ff8000;
     color: white;
-    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -53,41 +54,16 @@ button:hover {
     background-color: #e07b00;
 }
 
-input {
-    padding: 10px;
-    font-size: 1.2rem;
-    width: 100%;
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 15px;
-}
-
 #prayer-times ul {
     list-style: none;
     padding: 0;
-    text-align: left;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 #prayer-times li {
     background: rgba(255, 255, 255, 0.3);
-    padding: 12px;
     margin: 8px 0;
-    border-radius: 10px;
-    font-size: 1.2rem;
-}
-
-footer {
-    margin-top: 30px;
-    font-size: 0.8rem;
-    color: #ccc;
-}
-
-footer a {
-    color: #ff8000;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: left;
 }
