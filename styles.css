@@ -23,7 +23,7 @@ body {
     padding: 20px;
     border-radius: 15px;
     width: 90%;
-    max-width: 600px;
+    max-width: 1000px;
     color: white;
 }
 
@@ -32,13 +32,23 @@ body {
     margin-bottom: 20px;
 }
 
+/* Erklärungstext */
+.about {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    margin-top: 20px;
+}
+
+/* Eingabefeld und Button */
 #postalCode {
     padding: 12px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    width: 80%; /* Breiteres Eingabefeld */
-    margin-bottom: 15px; /* Abstand nach unten */
+    width: 80%;
+    margin-bottom: 15px;
     background-color: #ffffff;
     color: #333;
 }
@@ -60,21 +70,26 @@ button:hover {
 
 /* Gebetszeiten */
 .prayer-section {
-    text-align: left;
+    text-align: center;
     margin-top: 20px;
 }
 
 .prayer-section ul {
+    display: flex;
+    justify-content: center;
     list-style: none;
     padding: 0;
+    flex-wrap: wrap; /* Ermöglicht flexibles Umfließen */
+    margin: 0;
 }
 
 .prayer-section li {
     background: rgba(255, 255, 255, 0.2);
-    margin: 0.5rem 0;
+    margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
     text-align: center;
+    min-width: 100px; /* Verhindert, dass die Elemente zu klein werden */
 }
 
 /* Footer */
