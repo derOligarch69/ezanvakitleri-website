@@ -28,12 +28,29 @@ document.getElementById('fetchTimes').addEventListener('click', async () => {
         const list = document.getElementById('timesList');
         list.innerHTML = ''; // Liste zurücksetzen
 
-        // Zeige die Gebetszeiten auf der Seite an
+        // Zeige die Gebetszeiten auf der Seite an, in horizontaler Reihenfolge
+        const timeContainer = document.createElement('div');
+        timeContainer.style.display = 'flex';
+        timeContainer.style.flexWrap = 'wrap';
+        timeContainer.style.justifyContent = 'space-around';
+        timeContainer.style.marginTop = '20px';
+
         Object.entries(timings).forEach(([prayer, time]) => {
-            const li = document.createElement('li');
-            li.textContent = `${prayer}: ${time}`;
-            list.appendChild(li);
+            const timeBox = document.createElement('div');
+            timeBox.style.background = 'rgba(255, 255, 255, 0.2)';
+            timeBox.style.padding = '10px';
+            timeBox.style.margin = '5px';
+            timeBox.style.borderRadius = '5px';
+            timeBox.style.fontSize = '1.2rem';
+            timeBox.style.color = 'white';
+            timeBox.style.flex = '1 1 30%'; // Jeder Block nimmt mindestens 30% der Breite ein (bei mehr Platz verteilt es sich)
+            timeBox.style.textAlign = 'center';
+            timeBox.textContent = `${prayer}: ${time}`;
+
+            timeContainer.appendChild(timeBox);
         });
+
+        list.appendChild(timeContainer);
 
     } catch (error) {
         console.error(error);
