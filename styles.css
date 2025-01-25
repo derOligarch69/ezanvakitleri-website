@@ -5,16 +5,20 @@ body {
     color: #ffffff;
     text-align: center;
     background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column; /* Damit die Elemente in der Reihenfolge gestapelt werden */
+    min-height: 100vh; /* Stellt sicher, dass der Körper die gesamte Höhe des Viewports ausfüllt */
 }
 
 /* Hintergrund mit Kaaba */
 .background {
     background: url('https://www.shutterstock.com/image-photo/kaaba-makkah-night-view-600w-1613381637.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    height: 100%; /* Hintergrund über die gesamte Höhe */
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-grow: 1; /* Damit der Hintergrund den gesamten freien Raum einnimmt */
 }
 
 /* Overlay */
@@ -25,6 +29,10 @@ body {
     width: 90%;
     max-width: 1000px;
     color: white;
+    display: flex;
+    flex-direction: column; /* Flexbox für vertikale Anordnung */
+    justify-content: flex-start; /* Stellt sicher, dass die Elemente von oben nach unten ausgerichtet sind */
+    height: 100%; /* Overlay nimmt die gesamte Höhe ein */
 }
 
 /* Eingabebereich */
@@ -39,6 +47,9 @@ body {
     border-radius: 15px;
     color: white;
     margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    flex-shrink: 0; /* Verhindert, dass der Erklärungstext die Gebetszeiten nach unten drückt */
 }
 
 /* Eingabefeld und Button */
@@ -72,6 +83,7 @@ button:hover {
 .prayer-section {
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 20px; /* Damit der Abstand zur Erklärung etwas kleiner wird */
 }
 
 .prayer-section ul {
@@ -97,6 +109,7 @@ footer {
     margin-top: 30px;
     font-size: 14px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .ad-banner {
