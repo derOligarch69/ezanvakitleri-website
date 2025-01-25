@@ -25,33 +25,33 @@
             d.head.appendChild(s);
         })(window, document);
     </script>
-    
 </head>
 <body>
     <div class="background">
         <div class="overlay">
             <header>
                 <h1>Islamische Gebetszeiten</h1>
-                <p>Aktuelle Gebetszeiten für deinen Standort</p>
+                <p>Aktuelle Gebetszeiten für deine Stadt</p>
             </header>
             <main>
                 <section class="input-section">
+                    <label for="postalCode">Stadtname eingeben:</label>
                     <input 
                         type="text" 
                         id="postalCode" 
-                        placeholder="PLZ eingeben (z. B. 10115)"
-                        maxlength="5">
+                        placeholder="Stadtname eingeben (z. B. Berlin)"
+                        maxlength="100">
                     <button id="fetchTimes">Zeige Gebetszeiten</button>
                 </section>
                 <section id="prayer-times" class="prayer-section">
                     <h2>Gebetszeiten</h2>
                     <ul id="timesList">
-                        <li>Bitte geben Sie Ihre PLZ ein.</li>
+                        <li>Bitte geben Sie einen Stadtnamen ein und klicken Sie auf "Zeige Gebetszeiten".</li>
                     </ul>
                 </section>
             </main>
             <footer>
-                <p>© 2024 Gebetszeiten-Service | <a href="#">Datenschutz</a> | <a href="#">Impressum</a></p>
+                <p>© 2024 Gebetszeiten-Service | <a href="datenschutz.html">Datenschutz</a> | <a href="impressum.html">Impressum</a></p>
             </footer>
             
             <!-- Google AdSense Banner im Footer -->
