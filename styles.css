@@ -50,6 +50,7 @@ body {
     margin-bottom: 20px;
     text-align: center;
     flex-shrink: 0; /* Verhindert, dass der Erklärungstext die Gebetszeiten nach unten drückt */
+    display: none; /* Der Erklärungstext wird nur angezeigt, wenn er angeklickt wird */
 }
 
 /* Eingabefeld und Button */
@@ -102,6 +103,7 @@ button:hover {
     border-radius: 5px;
     text-align: center;
     min-width: 100px; /* Verhindert, dass die Elemente zu klein werden */
+    flex: 1 1 30%; /* Jede Gebetszeit nimmt mindestens 30% der Breite ein */
 }
 
 /* Footer */
