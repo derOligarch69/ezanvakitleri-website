@@ -29,8 +29,11 @@
                     <button id="fetchTimes">Zeige Gebetszeiten</button>
                 </section>
 
-                <!-- Erklärungstext -->
-                <section class="about">
+                <!-- Button zum Ein-/Ausblenden des Erklärungstexts -->
+                <button id="toggleDescription">Erklärung anzeigen</button>
+
+                <!-- Erklärungstext, standardmäßig ausgeblendet -->
+                <section id="about" class="about" style="display: none;">
                     <h2>Über Unsere Gebetszeiten-Website</h2>
                     <p><strong>Willkommen auf unserer Plattform für präzise und zuverlässige Islamische Gebetszeiten.</strong> Unser Ziel ist es, dir den Alltag zu erleichtern, indem wir dir schnell und genau die Gebetszeiten für deine Stadt zur Verfügung stellen. Wir wissen, wie wichtig es ist, pünktlich und im Einklang mit den religiösen Verpflichtungen zu beten, deshalb bieten wir eine benutzerfreundliche Lösung, um die Gebetszeiten jederzeit und überall zu erfahren.</p>
                     
@@ -70,5 +73,21 @@
             </footer>
         </div>
     </div>
+
+    <!-- JavaScript zum Toggle der Anzeige des Erklärungstexts -->
+    <script>
+        document.getElementById('toggleDescription').addEventListener('click', function() {
+            var description = document.getElementById('about');
+            
+            // Wenn der Text sichtbar ist, verstecke ihn, wenn nicht, zeige ihn an
+            if (description.style.display === 'none') {
+                description.style.display = 'block';
+                this.textContent = 'Erklärung ausblenden'; // Button-Text ändern
+            } else {
+                description.style.display = 'none';
+                this.textContent = 'Erklärung anzeigen'; // Button-Text ändern
+            }
+        });
+    </script>
 </body>
 </html>
