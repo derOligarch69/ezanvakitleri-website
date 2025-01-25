@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     color: #ffffff;
     text-align: center;
+    background-color: #f4f4f4;
 }
 
 /* Hintergrund mit Kaaba */
@@ -16,35 +17,41 @@ body {
     align-items: center;
 }
 
+/* Overlay */
 .overlay {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7); /* Etwas dunkler für bessere Lesbarkeit */
     padding: 20px;
     border-radius: 15px;
     width: 90%;
     max-width: 600px;
+    color: white;
 }
 
-/* Input-Bereich */
+/* Eingabebereich */
 .input-section {
     margin-bottom: 20px;
 }
 
 #postalCode {
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    width: 70%;
+    width: 80%; /* Breiteres Eingabefeld */
+    margin-bottom: 15px; /* Abstand nach unten */
+    background-color: #ffffff;
+    color: #333;
 }
 
 button {
-    padding: 10px 15px;
+    padding: 12px 20px;
     font-size: 1rem;
     color: white;
     background-color: #28a745;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 80%;
 }
 
 button:hover {
@@ -54,6 +61,7 @@ button:hover {
 /* Gebetszeiten */
 .prayer-section {
     text-align: left;
+    margin-top: 20px;
 }
 
 .prayer-section ul {
@@ -67,4 +75,65 @@ button:hover {
     padding: 0.5rem;
     border-radius: 5px;
     text-align: center;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.ad-banner {
+    margin-top: 20px;
+}
+
+/* Responsives Design */
+@media (max-width: 768px) {
+    .overlay {
+        width: 95%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #postalCode, button {
+        font-size: 0.9rem;
+    }
+
+    .prayer-section li {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlay {
+        width: 95%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    #postalCode, button {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    .prayer-section li {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
 }
