@@ -1,35 +1,40 @@
 document.getElementById('fetchTimes').addEventListener('click', async () => {
-    const city = document.getElementById('postalCode').value.trim();
+    // Holen der Stadt vom Eingabefeld
+    const city = document.getElementById('cityName').value.trim();
+    const country = 'Germany'; // Du kannst das Land auch ändern, falls notwendig
 
     if (!city) {
         alert('Bitte geben Sie eine Stadt ein!');
         return;
     }
 
-    const diyanetUrl = `https://namazvakitleri.diyanet.gov.tr/en-US/${city}`;
+    // Die URL der Aladhan API
+    const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=2`;
 
     try {
-        const response = await fetch(diyanetUrl);
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
+        // API-Anfrage durchführen
+        const response = await fetch(apiUrl);
+        const data = await response.json();
 
-        const timings = Array.from(doc.querySelectorAll('.prayerTimesList tr')).map(row => {
-            const columns = row.querySelectorAll('td');
-            return {
-                prayer: columns[0]?.textContent.trim(),
-                time: columns[1]?.textContent.trim()
-            };
-        });
+        // Überprüfen, ob die API-Antwort erfolgreich war
+        if (data.code !== 200) {
+            throw new Error('Fehler beim Abrufen der Gebetszeiten');
+        }
 
+        // Gebetszeiten aus den API-Daten extrahieren
+        const timings = data.data.timings;
+
+        // Die Gebetszeiten im HTML anzeigen
         const list = document.getElementById('timesList');
         list.innerHTML = ''; // Liste zurücksetzen
 
-        timings.forEach(({ prayer, time }) => {
+        // Zeige die Gebetszeiten auf der Seite an
+        Object.entries(timings).forEach(([prayer, time]) => {
             const li = document.createElement('li');
             li.textContent = `${prayer}: ${time}`;
             list.appendChild(li);
         });
+
     } catch (error) {
         console.error(error);
         alert('Fehler beim Abrufen der Gebetszeiten.');
